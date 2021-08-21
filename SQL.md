@@ -41,32 +41,32 @@ Transaction has 4 features which are called ACID
 	* I: Isolation
 	* D: Durability
 There may have 3 problems in transaction
-	* Dirty read
-> User1         begin select * 10rows                    select *  15rows  
-> time line ——————————————————————————————————  
-> User2         begin              insert(5 rows)                             delete  commit  
-	* Unrepeatable read
-> User1         begin select * 10rows            !=             select *    
-> time line ——————————————————————————————————  
-> User2         begin                  update/ delete  commit  
-	* Phantom read
-> User1         begin select * 10rows            !=             select *    
-> time line ——————————————————————————————————  
-> User2         begin                      insert  commit      
->       
-> problems (va 10 milk, tx 0 milk)  
-> User1         begin select milk 10 VA                                    select * 0   
-> time line ——————————————————————————————————  
-> User2         begin         delete 10 milk, insert 10 milk into TX commit  
+	* Dirty read  
+	> User1         begin select * 10rows                    select *  15rows  
+	> time line ——————————————————————————————————  
+	> User2         begin              insert(5 rows)                             delete  commit  
+	* Unrepeatable read  
+	> User1         begin select * 10rows            !=             select *    
+	> time line ——————————————————————————————————  
+	> User2         begin                  update/ delete  commit  
+	* Phantom read  
+	> User1         begin select * 10rows            !=             select *    
+	> time line ——————————————————————————————————  
+	> User2         begin                      insert  commit      
+	>       
+	> problems (va 10 milk, tx 0 milk)  
+	> User1         begin select milk 10 VA                                    select * 0   
+	> time line ——————————————————————————————————  
+	> User2         begin         delete 10 milk, insert 10 milk into TX commit  
 There are 4 different levels of isolation to avoid those problem:
-	* READ_UNCOMMITED
-	✅unrepeatable read, Phantom read, dirty read
-	* READ_COMMITED
-	✅unrepeatable read, Phantom read
-	❎dirty read
-	* REPEATABLE
-	✅Phantom read
-	❎unrepeatable read, dirty read
-	* SERIALIZABLE
-	❎all
+	* READ_UNCOMMITED   
+	✅unrepeatable read, Phantom read, dirty read  
+	* READ_COMMITED  
+	✅unrepeatable read, Phantom read  
+	❎dirty read  
+	* REPEATABLE  
+	✅Phantom read  
+	❎unrepeatable read, dirty read  
+	* SERIALIZABLE  
+	❎all  
 
